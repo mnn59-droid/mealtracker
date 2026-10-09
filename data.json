@@ -1,0 +1,40 @@
+{
+  "workouts": [
+    {
+      "id": "1791507335210",
+      "type": "Running",
+      "durationMin": 30,
+      "caloriesBurned": 100,
+      "date": "2026-10-08"
+    },
+    {
+      "id": "1791507958844",
+      "type": "running",
+      "durationMin": 30,
+      "caloriesBurned": 100,
+      "date": "2026-10-08"
+    },
+    {
+      "id": "1791510082245",
+      "type": "running",
+      "durationMin": 40,
+      "caloriesBurned": 200,
+      "date": "2026-10-08"
+    }
+  ],
+  "meals": [
+    {
+      "id": "1791511393803",
+      "name": "rice",
+      "calories": 200,
+      "protein": 10,
+      "carbs": 66,
+      "fats": 7,
+      "date": "2026-10-08"
+    }
+  ],
+  "water": {
+    "2026-10-07": 42,
+    "2026-10-08": 233
+  }
+}

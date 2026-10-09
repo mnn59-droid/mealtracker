@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FitTrack - Fitness & Calorie Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Desktop Sidebar: Daily Targets & Macros -->
+    <aside class="sidebar">
+      <div class="brand">
+        <h2>FitTrack</h2>
+        <p>Daily Overview</p>
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-group">
+          <div class="progress-header">
+            <span>Calories</span>
+          </div>
+          <div class="progress-track">
+            <div id="calories-bar" class="progress-fill cal">0 / 2000</div>
+          </div>
+        </div>
+
+        <div class="progress-group">
+          <div class="progress-header">
+            <span>Protein</span>
+          </div>
+          <div class="progress-track">
+            <div id="protein-bar" class="progress-fill protein">0 / 150</div>
+          </div>
+        </div>
+
+        <div class="progress-group">
+          <div class="progress-header">
+            <span>Carbs</span>
+          </div>
+          <div class="progress-track">
+            <div id="carbs-bar" class="progress-fill carbs">0 / 250</div>
+          </div>
+        </div>
+
+        <div class="progress-group">
+          <div class="progress-header">
+            <span>Fats</span>
+          </div>
+          <div class="progress-track">
+            <div id="fats-bar" class="progress-fill fats">0 / 70</div>
+          </div>
+        </div>
+
+        <div class="progress-group">
+          <div class="progress-header">
+            <span>Water</span>
+          </div>
+          <div class="progress-track">
+            <div id="water-bar" class="progress-fill water">0 / 3000</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area: Tracking Modules -->
+    <main class="main-content">
+      <header class="top-header">
+        <h1>Activity & Nutrition Tracker</h1>
+        <p>Manage your daily training, nutrition logs, and fluid intake.</p>
+      </header>
+
+      <div class="content-grid">
+        <!-- Workouts Card -->
+        <section class="card">
+          <div class="card-title">
+            <span class="indicator workout-dot"></span>
+            <h3>Workouts</h3>
+          </div>
+          <form id="workout-form">
+            <input type="text" name="type" placeholder="Type (e.g. Running, HIIT)" required />
+            <input type="number" name="durationMin" placeholder="Duration (min)" min="1" required />
+            <input type="number" name="caloriesBurned" placeholder="Calories Burned" min="0" required />
+            <input type="date" name="date" />
+            <button type="submit" class="btn btn-workout">Add Workout</button>
+          </form>
+          <h4>Recent Activity</h4>
+          <ul id="workout-list" class="tracker-list"></ul>
+        </section>
+
+        <!-- Meals Card -->
+        <section class="card">
+          <div class="card-title">
+            <span class="indicator meal-dot"></span>
+            <h3>Meals</h3>
+          </div>
+          <form id="meal-form">
+            <input type="text" name="name" placeholder="Meal Name (e.g. Chicken Rice)" required />
+            <input type="number" name="calories" placeholder="Calories" min="0" required />
+            <div class="macro-inputs">
+              <input type="number" name="protein" placeholder="Prot (g)" min="0" required />
+              <input type="number" name="carbs" placeholder="Carbs (g)" min="0" required />
+              <input type="number" name="fats" placeholder="Fat (g)" min="0" required />
+            </div>
+            <input type="date" name="date" />
+            <button type="submit" class="btn btn-meal">Add Meal</button>
+          </form>
+          <h4>Recent Meals</h4>
+          <ul id="meal-list" class="tracker-list"></ul>
+        </section>
+
+        <!-- Water Card -->
+        <section class="card">
+          <div class="card-title">
+            <span class="indicator water-dot"></span>
+            <h3>Hydration</h3>
+          </div>
+          <form id="water-form">
+            <input type="number" name="amount" placeholder="Amount (ml, e.g. 250)" min="1" required />
+            <input type="date" name="date" />
+            <button type="submit" class="btn btn-water">Add Water</button>
+          </form>
+          <h4>Hydration Log</h4>
+          <ul id="water-list" class="tracker-list"></ul>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -9,23 +9,28 @@ const DATA_FILE_NAME = path.join(__dirname,'data.json');
 app.use(express.json());
 app.use(express.static(__dirname));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 function saveData(data){
     fs.writeFileSync(DATA_FILE_NAME, JSON.stringify(data, null, 2));
 }
 
 function loadData(){
     try{
-        return JSON.parse(fs.readFileSync(DATA_FILE_NAME, 'utf-8'));
+        const data= JSON.parse(fs.readFileSync(DATA_FILE_NAME, 'utf-8'));
+        return{workouts: data.workouts || [], meals: data.meals || [], water: data.water || {}};
     }catch (e){
         return{workouts: [], meals: [], water: {}};
     }
 }
-function saveData(data){
-    fs.writeFileSync(DATA_FILE_NAME, JSON.stringify(data, null, 2));
-}
+
 function todayStr(){
-    return new Date().toISOString().split('T')[0];
+    const today = new Date();
+    return new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().split('T')[0];
 }
+
 // ------------------Workouts API------------------
 app.get('/api/workouts', (req, res) => {
     const data = loadData();
@@ -43,8 +48,9 @@ app.post('/api/workouts', (req, res) => {
     };
     data.workouts.push(newWorkout);
     saveData(data);
-    res.status(201).json(newWorkout); 
+    res.status(201).json(newWorkout);
 });
+
 app.delete('/api/workouts/:id', (req, res) => {
     const data = loadData();
     data.workouts = data.workouts.filter(workout => workout.id !== req.params.id);
@@ -52,11 +58,15 @@ app.delete('/api/workouts/:id', (req, res) => {
     res.json({ok: true});
 });
 
-
 //------------------Meals API------------------
 app.get('/api/meals', (req, res) => {
     const data = loadData();
-    const meal = {
+    res.json(data.meals);
+});
+
+app.post('/api/meals', (req, res) => {
+    const data = loadData();
+    const newMeal = {
         id: Date.now().toString(),
         name: req.body.name || 'Meal',
         calories: Number(req.body.calories) || 0,
@@ -65,10 +75,11 @@ app.get('/api/meals', (req, res) => {
         fats: Number(req.body.fats) || 0,
         date: req.body.date || todayStr()
     };
-    data.meals.push(meal);
+    data.meals.push(newMeal);
     saveData(data);
-    res.status(201).json(meal); 
-})
+    res.status(201).json(newMeal);
+});
+
 app.delete('/api/meals/:id', (req, res) => {
     const data = loadData();
     data.meals = data.meals.filter(meal => meal.id !== req.params.id);
@@ -81,11 +92,13 @@ app.get('/api/water', (req, res) => {
     const data = loadData();
     res.json(data.water || {});
 });
-S
 app.post('/api/water', (req, res) => {
     const data = loadData();
     const date = req.body.date || todayStr();
-    const amount = Number(req.body.amount) || 0;
+    const amount = Number(req.body.amount);
+    if(!Number.isFinite(amount) || amount <= 0) {
+        return res.status(400).json({error: 'Invalid amount'});
+    }
     data.water[date] = (data.water[date] || 0) + amount;
     saveData(data);
     res.status(201).json({ date, amount: data.water[date] });

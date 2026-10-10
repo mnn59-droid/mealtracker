@@ -7,6 +7,54 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  
+<!-- TOP NAVIGATION BAR -->
+<header class="navbar">
+    <div class="nav-brand">
+        <h2>🌿 FitTrack</h2>
+        <p>Your Personal Wellness Companion</p>
+    </div>
+
+    <nav class="nav-links">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#workouts">Workouts</a>
+        <a href="#meals">Meals</a>
+        <a href="#hydration">Hydration</a>
+        <a href="#ai-coach">AI Coach</a>
+    </nav>
+
+    <div class="nav-profile">
+        <span>👤 My Profile</span>
+    </div>
+</header>
+
+<!-- WELCOME SECTION -->
+<section class="welcome-section" id="dashboard">
+
+    <div class="welcome-content">
+        <p class="welcome-tag">YOUR WELLNESS DASHBOARD</p>
+
+        <h1>Welcome to FitTrack 🌱</h1>
+
+        <p>
+            Build healthier habits, track your nutrition,
+            monitor your workouts, and stay motivated
+            throughout your fitness journey.
+        </p>
+    </div>
+
+    <div class="welcome-actions">
+        <a href="#meals" class="primary-button">
+            🥗 Log Your Meals
+        </a>
+
+        <a href="#ai-coach" class="secondary-button">
+            ✨ Ask AI Coach
+        </a>
+    </div>
+
+</section>
+
   <div class="dashboard-layout">
     <!-- Desktop Sidebar: Daily Targets & Macros -->
     <aside class="sidebar">
@@ -72,7 +120,7 @@
 
       <div class="content-grid">
         <!-- Workouts Card -->
-        <section class="card">
+        <section class="card" id="workouts">
           <div class="card-title">
             <span class="indicator workout-dot"></span>
             <h3>Workouts</h3>
@@ -89,7 +137,7 @@
         </section>
 
         <!-- Meals Card -->
-        <section class="card">
+        <section class="card" id="meals">
           <div class="card-title">
             <span class="indicator meal-dot"></span>
             <h3>Meals</h3>
@@ -110,7 +158,7 @@
         </section>
 
         <!-- Water Card -->
-        <section class="card">
+        <section class="card" id="hydration">
           <div class="card-title">
             <span class="indicator water-dot"></span>
             <h3>Hydration</h3>
@@ -127,6 +175,106 @@
     </main>
   </div>
 
+  <!-- AI FITNESS & NUTRITION CHATBOT -->
+  <section class="ai-coach-section" id="ai-coach">
+
+      <div class="ai-coach-heading">
+          <span>✨ YOUR PERSONAL AI ASSISTANT</span>
+          <h2>Meet Your FitTrack AI Coach</h2>
+          <p>
+              Have questions about your meals, workout routines,
+              calories, or nutrition? Your wellness assistant
+              is here to help.
+          </p>
+      </div>
+
+      <div class="ai-chat-layout">
+
+          <!-- LEFT: CHAT HISTORY -->
+          <aside class="ai-chat-sidebar">
+              <h3>🌿 FitTrack AI</h3>
+
+              <button id="new-chat" type="button">
+                  + New Conversation
+              </button>
+
+              <h4>Recent Conversations</h4>
+
+              <div id="chat-history">
+                  <p>Your conversations will appear here.</p>
+              </div>
+          </aside>
+
+          <!-- RIGHT: CHATBOT -->
+          <div class="ai-chat-container">
+
+              <div class="ai-chat-header">
+                  <div>
+                      <h3>🥑 Your Wellness Assistant</h3>
+                      <p>Nutrition • Fitness • Healthy Living</p>
+                  </div>
+
+                  <span class="ai-status">
+                      ● AI Coach
+                  </span>
+              </div>
+
+              <div id="chat-messages" class="ai-chat-messages">
+
+                  <div class="ai-welcome-message">
+                      <h3>Hey there! 👋</h3>
+                      <p>
+                          I'm your FitTrack wellness assistant.
+                          Ask me about healthy meals, fitness
+                          routines, nutrition, or daily habits.
+                      </p>
+                  </div>
+
+                  <div class="ai-suggestions">
+                      <button type="button" class="suggestion">
+                          🥗 Suggest a healthy meal
+                      </button>
+
+                      <button type="button" class="suggestion">
+                          🏋️ Create a workout routine
+                      </button>
+
+                      <button type="button" class="suggestion">
+                          🍎 Explain nutrition basics
+                      </button>
+
+                      <button type="button" class="suggestion">
+                          💧 Healthy lifestyle tips
+                      </button>
+                  </div>
+
+              </div>
+
+              <!-- CHAT MESSAGE INPUT -->
+              <form id="chat-form" class="ai-chat-input">
+                  <input
+                      type="text"
+                      id="user-input"
+                      placeholder="Ask your AI wellness coach..."
+                      autocomplete="off"
+                      required
+                  >
+
+                  <button type="submit">
+                      Send ➤
+                  </button>
+              </form>
+
+              <p class="ai-chat-note">
+                  Your personal fitness and nutrition companion 🌿
+              </p>
+
+          </div>
+      </div>
+
+  </section>
+  
   <script src="script.js"></script>
+
 </body>
 </html>

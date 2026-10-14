@@ -854,3 +854,196 @@ input:focus {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ====================================
+   WEEKLY ROADMAP AND MEAL BUILDER
+   ==================================== */
+
+.roadmap-section {
+    max-width: 1180px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #111827;
+    border: 1px solid #374151;
+    border-radius: 16px;
+    color: #f9fafb;
+}
+
+.roadmap-section h2 {
+    font-size: 26px;
+    margin-bottom: 12px;
+}
+
+.roadmap-section > p {
+    color: #9ca3af;
+    margin-bottom: 20px;
+}
+
+/* Meal selection area */
+
+.meal-builder {
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 22px;
+    margin: 22px 0;
+}
+
+.meal-builder-heading h3 {
+    margin-bottom: 8px;
+    color: #f9fafb;
+}
+
+.meal-builder-heading p {
+    color: #9ca3af;
+    margin-bottom: 18px;
+}
+
+.meal-builder-form {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.meal-builder-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.meal-builder-field label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #d1d5db;
+}
+
+.meal-builder-field select {
+    width: 100%;
+    padding: 12px;
+    background: #111827;
+    color: white;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    font: inherit;
+}
+
+/* Buttons */
+
+.meal-builder-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.meal-builder-submit,
+.meal-builder-reset {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.meal-builder-submit {
+    background: #22c55e;
+    color: #07130a;
+}
+
+.meal-builder-reset {
+    background: #374151;
+    color: white;
+}
+
+.meal-builder-status {
+    margin-top: 15px;
+    color: #86efac;
+    font-size: 14px;
+}
+
+/* Expandable weekly timetable */
+
+.roadmap-details summary {
+    background: #16a34a;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+}
+
+.roadmap-table-wrapper {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.roadmap-table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.roadmap-table th {
+    background: #1f2937;
+    color: #86efac;
+    padding: 15px;
+}
+
+.roadmap-table td {
+    padding: 15px;
+    border-bottom: 1px solid #374151;
+    vertical-align: top;
+}
+
+.roadmap-table tbody tr:hover {
+    background: #1f2937;
+}
+
+.roadmap-meals {
+    display: grid;
+    gap: 6px;
+}
+
+.roadmap-meals strong {
+    color: #86efac;
+}
+
+.roadmap-note {
+    color: #9ca3af;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+/* Smaller screens */
+
+@media (max-width: 900px) {
+    .meal-builder-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .roadmap-section {
+        margin: 20px 12px;
+        padding: 15px;
+    }
+
+    .meal-builder {
+        padding: 15px;
+    }
+
+    .meal-builder-form {
+        grid-template-columns: 1fr;
+    }
+
+    .meal-builder-actions {
+        flex-direction: column;
+    }
+}
+

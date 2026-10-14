@@ -20,6 +20,13 @@
       "durationMin": 40,
       "caloriesBurned": 200,
       "date": "2026-10-08"
+    },
+    {
+      "id": "1791936266951",
+      "type": "running",
+      "durationMin": 30,
+      "caloriesBurned": 120,
+      "date": "2026-10-13"
     }
   ],
   "meals": [
@@ -31,10 +38,29 @@
       "carbs": 66,
       "fats": 7,
       "date": "2026-10-08"
+    },
+    {
+      "id": "1791936198407",
+      "name": "rice",
+      "calories": 200,
+      "protein": 44,
+      "carbs": 23,
+      "fats": 12,
+      "date": "2026-10-13"
+    },
+    {
+      "id": "1791936756508",
+      "name": "rice",
+      "calories": 455,
+      "protein": 45,
+      "carbs": 55,
+      "fats": 7,
+      "date": "2026-10-13"
     }
   ],
   "water": {
     "2026-10-07": 42,
-    "2026-10-08": 233
+    "2026-10-08": 233,
+    "2026-10-13": 90
   }
 }

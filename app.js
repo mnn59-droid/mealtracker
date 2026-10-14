@@ -30,6 +30,22 @@ function todayStr(){
     const today = new Date();
     return new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().split('T')[0];
 }
+function updateMealCircle(meals){
+    const MEAL_GOAL = 4;
+    const today = new Date().toDateString.split("T")[0];
+    const todaysMeals = meals.filter(meal => {
+        return !meal.date || meal.date === today;
+    });
+    const mealCount = todaysMeals.length;
+
+    const percentage = Math.min((mealCount / MEAL_GOAL)* 100,100);
+
+    const degrees = percentage * 3.6;
+    const circle = document.getElementById("meals-circle");
+    const text = document.getElementById("meals-circle-value");
+    circle.computedStyleMap.setProperty("--progress",`${degrees}deg`);
+    text.textContent= `${mealCount}/${MEAL_GOAL}`
+}
 
 // ------------------Workouts API------------------
 app.get('/api/workouts', (req, res) => {

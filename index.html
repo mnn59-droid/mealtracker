@@ -188,7 +188,7 @@
     </div>
 
   </section>
-</main>
+</div>
 
   <!-- AI FITNESS & NUTRITION CHATBOT -->
   <section class="ai-coach-section" id="ai-coach">
@@ -287,9 +287,168 @@
           </div>
       </div>
 
-  </section>
   
-  <script src="script.js"></script>
+</section> <!-- END OF AI COACH -->
+
+
+<!-- WEEKLY WELLNESS ROADMAP -->
+<section class="roadmap-section" id="weekly-roadmap">
+
+    <h2>📅 Your Weekly Wellness Roadmap</h2>
+
+    <p>
+        Plan your meals, workouts, and healthy habits
+        throughout the week.
+    </p>
+
+    
+<!-- MEAL SELECTION FORM -->
+<div class="meal-builder">
+
+    <div class="meal-builder-heading">
+        <h3>🥗 Build Your Weekly Meal Table</h3>
+        <p>
+            Pick an eating style and your favorite meals.
+            We'll create your weekly timetable from predefined options.
+        </p>
+    </div>
+
+    <form id="meal-builder-form" class="meal-builder-form">
+
+        <div class="meal-builder-field">
+            <label for="meal-style">Eating Style</label>
+            <select id="meal-style" name="style">
+                <option value="balanced">Balanced</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="highProtein">High Protein</option>
+            </select>
+        </div>
+
+        <div class="meal-builder-field">
+            <label for="favorite-breakfast">Choose a Breakfast</label>
+            <select id="favorite-breakfast" name="breakfast"></select>
+        </div>
+
+        <div class="meal-builder-field">
+            <label for="favorite-lunch">Choose a Lunch</label>
+            <select id="favorite-lunch" name="lunch"></select>
+        </div>
+
+        <div class="meal-builder-field">
+            <label for="favorite-dinner">Choose a Dinner</label>
+            <select id="favorite-dinner" name="dinner"></select>
+        </div>
+
+        <div class="meal-builder-actions">
+            <button type="submit" class="meal-builder-submit">
+                Build My Meal Table
+            </button>
+
+            <button type="button"
+                    id="reset-meal-table"
+                    class="meal-builder-reset">
+                Show Sample Table
+            </button>
+        </div>
+
+    </form>
+
+    <p id="meal-builder-status"
+       class="meal-builder-status"
+       role="status"
+       aria-live="polite">
+        Choose your meals to create a weekly timetable.
+    </p>
+
+</div>
+
+<!-- EXISTING WEEKLY ROADMAP TABLE -->
+<details class="roadmap-details" id="roadmap-details">
+
+
+        <summary id="roadmap-summary">
+            View Sample Weekly Roadmap
+        </summary>
+
+        <div class="roadmap-table-wrapper">
+            <table class="roadmap-table">
+
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Meal Plan</th>
+                        <th>Workout</th>
+                        <th>Daily Goal</th>
+                    </tr>
+                </thead>
+
+                <tbody id="roadmap-body">
+                    <tr>
+                        <td>Monday</td>
+                        <td>Oats & rice bowl</td>
+                        <td>20-min walk</td>
+                        <td>Balanced meals</td>
+                    </tr>
+
+                    <tr>
+                        <td>Tuesday</td>
+                        <td>Eggs & lentil soup</td>
+                        <td>Strength basics</td>
+                        <td>Eat vegetables</td>
+                    </tr>
+
+                    <tr>
+                        <td>Wednesday</td>
+                        <td>Yogurt & tofu bowl</td>
+                        <td>25-min cycling</td>
+                        <td>Stay hydrated</td>
+                    </tr>
+
+                    <tr>
+                        <td>Thursday</td>
+                        <td>Smoothie & bean bowl</td>
+                        <td>Light stretching</td>
+                        <td>Sleep routine</td>
+                    </tr>
+
+                    <tr>
+                        <td>Friday</td>
+                        <td>Toast & chicken salad</td>
+                        <td>Bodyweight workout</td>
+                        <td>Recovery</td>
+                    </tr>
+
+                    <tr>
+                        <td>Saturday</td>
+                        <td>Fruit & veggie wrap</td>
+                        <td>Outdoor activity</td>
+                        <td>Meal preparation</td>
+                    </tr>
+
+                    <tr>
+                        <td>Sunday</td>
+                        <td>Oats & veggie pasta</td>
+                        <td>Rest or gentle walk</td>
+                        <td>Review progress</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </details>
+
+    <p class="roadmap-note" id="roadmap-note">
+        Example weekly schedule using predefined meals.
+    </p>
+
+</section>
+
+
+<!-- EXISTING JAVASCRIPT -->
+<script src="script.js"></script>
+<script src="meal-roadmap.js"></script>
 
 </body>
 </html>
+

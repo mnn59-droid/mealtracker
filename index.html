@@ -188,7 +188,7 @@
     </div>
 
   </section>
-</main>
+</div>
 
   <!-- AI FITNESS & NUTRITION CHATBOT -->
   <section class="ai-coach-section" id="ai-coach">
@@ -301,7 +301,70 @@
         throughout the week.
     </p>
 
-    <details class="roadmap-details" id="roadmap-details">
+    
+<!-- MEAL SELECTION FORM -->
+<div class="meal-builder">
+
+    <div class="meal-builder-heading">
+        <h3>🥗 Build Your Weekly Meal Table</h3>
+        <p>
+            Pick an eating style and your favorite meals.
+            We'll create your weekly timetable from predefined options.
+        </p>
+    </div>
+
+    <form id="meal-builder-form" class="meal-builder-form">
+
+        <div class="meal-builder-field">
+            <label for="meal-style">Eating Style</label>
+            <select id="meal-style" name="style">
+                <option value="balanced">Balanced</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="highProtein">High Protein</option>
+            </select>
+        </div>
+
+        <div class="meal-builder-field">
+            <label for="favorite-breakfast">Choose a Breakfast</label>
+            <select id="favorite-breakfast" name="breakfast"></select>
+        </div>
+
+        <div class="meal-builder-field">
+            <label for="favorite-lunch">Choose a Lunch</label>
+            <select id="favorite-lunch" name="lunch"></select>
+        </div>
+
+        <div class="meal-builder-field">
+            <label for="favorite-dinner">Choose a Dinner</label>
+            <select id="favorite-dinner" name="dinner"></select>
+        </div>
+
+        <div class="meal-builder-actions">
+            <button type="submit" class="meal-builder-submit">
+                Build My Meal Table
+            </button>
+
+            <button type="button"
+                    id="reset-meal-table"
+                    class="meal-builder-reset">
+                Show Sample Table
+            </button>
+        </div>
+
+    </form>
+
+    <p id="meal-builder-status"
+       class="meal-builder-status"
+       role="status"
+       aria-live="polite">
+        Choose your meals to create a weekly timetable.
+    </p>
+
+</div>
+
+<!-- EXISTING WEEKLY ROADMAP TABLE -->
+<details class="roadmap-details" id="roadmap-details">
+
 
         <summary id="roadmap-summary">
             View Sample Weekly Roadmap

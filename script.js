@@ -33,13 +33,32 @@ function setBar(barId, value, goal) {
     bar.style.width = percentage + '%';
     bar.textContent = `${value} / ${goal}`; 
 }
+function setCircle(circleId, textId, value, goal) {
+    const circle = document.getElementById(circleId);
+    const text = document.getElementById(textId);
+
+    if (!circle || !text) return;
+
+    const percentage = Math.min((value / goal) * 100, 100);
+    const degrees = percentage * 3.6;
+
+    circle.style.setProperty('--progress', `${degrees}deg`);
+    text.textContent = `${value} / ${goal}`;
+}
 
 //------------------Renderers------------------
 //workout render
 function renderWorkouts(workouts) {
     if (!workoutList) return;
     workoutList.innerHTML = '';
+    const today = new Date().toLocaleDateString('en-CA');
+    let todayWorkoutCount = 0;
+    let totalCaloriesBurned = 0;
     workouts.slice().reverse().forEach(w => {
+        if(w.date === today) {
+            todayWorkoutCount++;
+            totalCaloriesBurned += Number(w.caloriesBurned) || 0;
+        }
         const li = document.createElement('li');
         li.innerHTML = `
             <span class="tag workout-type">WORKOUT</span>
@@ -51,6 +70,12 @@ function renderWorkouts(workouts) {
         `;
         workoutList.appendChild(li);
     });
+    setCircle('workouts-circle', 'workouts-circle-value', todayWorkoutCount, 2);
+    const caloriesBurnedValue = document.getElementById('calories-burned-value');
+
+    if (caloriesBurnedValue) {
+    caloriesBurnedValue.textContent = totalCaloriesBurned;
+}
 }
 //meal render
 function renderMeals(meals) {
@@ -59,9 +84,11 @@ function renderMeals(meals) {
 
     const today = new Date().toLocaleDateString('en-CA'); // Format: YYYY-MM-DD
     let totalCalories = 0, totalProtein = 0, totalCarbs = 0, totalFats = 0;
+    let todayMealCount = 0;
 
     meals.slice().reverse().forEach(m => {
         if(m.date === today) {
+            todayMealCount++;
             totalCalories += Number(m.calories) || 0;
             totalProtein += Number(m.protein) || 0;
             totalCarbs += Number(m.carbs) || 0;
@@ -86,6 +113,34 @@ function renderMeals(meals) {
     setBar('protein-bar', totalProtein, GOALS.protein);
     setBar('carbs-bar', totalCarbs, GOALS.carbs);
     setBar('fats-bar', totalFats, GOALS.fats);
+    setCircle('meals-circle', 'meals-circle-value', todayMealCount, 4);
+    const caloriesEaten = document.getElementById('calories-eaten-value');
+const caloriesCircle = document.getElementById('calories-circle');
+const caloriesPercent = document.getElementById('calories-circle-percent');
+
+const caloriePercentage = Math.min(
+    (totalCalories / GOALS.calories) * 100,
+    100
+);
+
+const calorieDegrees = caloriePercentage * 3.6;
+
+if (caloriesEaten) {
+    caloriesEaten.textContent = totalCalories;
+}
+
+if (caloriesCircle) {
+    caloriesCircle.style.setProperty(
+        '--progress',
+        `${calorieDegrees}deg`
+    );
+}
+
+if (caloriesPercent) {
+    caloriesPercent.textContent =
+        `${Math.round(caloriePercentage)}%`;
+}
+setCircle('meals-circle', 'meals-circle-value', todayMealCount, 4);
 }
 //water render
 function renderWater(waterData) {
@@ -106,8 +161,12 @@ function renderWater(waterData) {
         waterList.appendChild(li);
     });
 
-    setBar('water-bar', todayTotal, GOALS.water);
-}
+    setCircle(
+        'water-circle',
+        'water-circle-value',
+        todayTotal,
+        GOALS.water
+    );}
 
 //------------------Forms------------------
 document.getElementById('workout-form')?.addEventListener('submit', async (e) => {

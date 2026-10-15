@@ -27,6 +27,20 @@
       "durationMin": 30,
       "caloriesBurned": 120,
       "date": "2026-10-13"
+    },
+    {
+      "id": "1792074692407",
+      "type": "HIIT",
+      "durationMin": 120,
+      "caloriesBurned": 250,
+      "date": "2026-10-15"
+    },
+    {
+      "id": "1792075210328",
+      "type": "running ",
+      "durationMin": 120,
+      "caloriesBurned": 100,
+      "date": "2026-10-15"
     }
   ],
   "meals": [
@@ -56,11 +70,21 @@
       "carbs": 55,
       "fats": 7,
       "date": "2026-10-13"
+    },
+    {
+      "id": "1792074674743",
+      "name": "Rice",
+      "calories": 200,
+      "protein": 23,
+      "carbs": 55,
+      "fats": 10,
+      "date": "2026-10-15"
     }
   ],
   "water": {
     "2026-10-07": 42,
     "2026-10-08": 233,
-    "2026-10-13": 90
+    "2026-10-13": 90,
+    "2026-10-15": 200
   }
 }

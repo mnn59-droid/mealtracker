@@ -1045,5 +1045,69 @@ input:focus {
     .meal-builder-actions {
         flex-direction: column;
     }
+  }
+    /* ===== CENTER THE WHOLE APP ===== */
+
+body {
+    margin: 0;
+    background: #0b1220;
+}
+
+.navbar,
+.welcome-section,
+.dashboard-layout,
+.ai-coach-section,
+.roadmap-section {
+    width: min(1180px, calc(100% - 40px));
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Main dashboard area */
+.dashboard-layout {
+    padding: 30px 0;
+}
+
+/* Daily calories card */
+.calorie-summary {
+    max-width: 900px;
+    margin: 0 auto 35px auto;
+}
+
+/* Meals / Workouts / Hydration */
+.wireframe-three-column {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+/* Prevent each column from becoming too wide */
+.wireframe-column {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+/* AI Coach */
+.ai-coach-section {
+    max-width: 1000px;
+    margin: 60px auto;
+}
+
+/* AI chat itself */
+.ai-chat-layout {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Weekly roadmap */
+.roadmap-section {
+    max-width: 950px;
+    margin: 60px auto;
+}
 }
 

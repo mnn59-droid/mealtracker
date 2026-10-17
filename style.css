@@ -16,7 +16,6 @@
 
   --radius-card: 10px;
   --radius-input: 6px;
-}
 
 /* =========================
    RESET
@@ -439,7 +438,19 @@ input {
 input:focus {
   border-color: var(--accent-cyan);
 }
+input[type = "date"]{
+  width: 100%;
+  color-scheme: dark;
+  background-color: var(--bg-input);
+  color: var(--text-main)
+}
+input[type="date"]::-webkit-calendar-picker-indicator{
+  filter: invert(1);
+  cursor : pointer;
+  opacity: 1;
+}
 
+}
 .btn {
   border: none;
   border-radius: var(--radius-input);

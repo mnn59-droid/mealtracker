@@ -41,6 +41,13 @@
       "durationMin": 120,
       "caloriesBurned": 100,
       "date": "2026-10-15"
+    },
+    {
+      "id": "1792221938212",
+      "type": "heavy lifting",
+      "durationMin": 30,
+      "caloriesBurned": 200,
+      "date": "2026-10-17"
     }
   ],
   "meals": [
@@ -79,6 +86,15 @@
       "carbs": 55,
       "fats": 10,
       "date": "2026-10-15"
+    },
+    {
+      "id": "1792221864246",
+      "name": "beef",
+      "calories": 300,
+      "protein": 44,
+      "carbs": 23,
+      "fats": 10,
+      "date": "2026-10-17"
     }
   ],
   "water": {

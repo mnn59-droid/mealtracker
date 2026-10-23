@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { callbackify } = require('util');
 
 const app = express();
 const PORT = 3000;
@@ -321,6 +322,25 @@ function updateMealCircle(meals){
     circle.computedStyleMap.setProperty("--progress",`${degrees}deg`);
     text.textContent= `${mealCount}/${MEAL_GOAL}`
 }
+function applyPatch(item, body , fields){
+    for(const [key, kind] of Object.entries(fields)){
+        const value = body[key];
+        if(value === undefined || value === null || value === '')continue;
+
+        if(kind === 'number'){
+            const n = Number(value);
+            if(Number.isFinite(n) && n >= 0) item[key] = n;
+        }else if(kind === 'date'){
+            if(/^\d{4}-\d{2}-\d{2}$/.test(value)) item[key] = value;
+
+        }else{
+            const text = String(value).trim();
+            if(text) item[key] = text;
+        }
+    }
+}
+const WORKOUT_FIELDS = {type: 'text', durationMin: 'number', caloriesBurned: 'number', date:'date'};
+const MEAL_FIELDS = {name: 'text', calories: 'number', protein:'number', carbs: 'number', fats: 'number', date: 'date'};
 
 // ------------------Workouts API------------------
 app.get('/api/workouts', (req, res) => {
@@ -394,7 +414,25 @@ app.post('/api/water', (req, res) => {
     saveData(data);
     res.status(201).json({ date, amount: data.water[date] });
 });
+//---------------Edit Routes--------------------
+app.patch('/api/workouts/:id', (req,res) => {
+    const data = loadData();
+    const workout = data.workouts.find(w => w.id === req.params.id);
+    if(!workout) return res.status(404).json({error: 'Workout not found!!'});
 
+    applyPatch(workout, req.body, WORKOUT_FIELDS);
+    saveData(data);
+    res.json(workout);
+})
+app.patch('/api/meals/:id', (req,res) => {
+    const data = loadData();
+    const meal = data.meals.find(m => m.id === req.params.id);
+    if (!meal) return res.status(404).json({error: 'Meal not found!!'});
+
+    applyPatch(meal, req.body, MEAL_FIELDS);
+    saveData(data);
+    res.json(meal);
+})
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

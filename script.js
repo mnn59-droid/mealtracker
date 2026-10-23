@@ -10,6 +10,69 @@ const workoutList = document.getElementById('workout-list');
 const mealList = document.getElementById('meal-list');
 const waterList = document.getElementById('water-list');
 
+//------------------Edit Support------------------
+let cache = { workouts: [], meals: [], water: {} };
+let editing = null; // { kind, id }
+
+const FIELDS = {
+    workouts: [
+        { key: 'type', label: 'Type', type: 'text' },
+        { key: 'durationMin', label: 'Minutes', type: 'number' },
+        { key: 'caloriesBurned', label: 'Cal burned', type: 'number' },
+        { key: 'date', label: 'Date', type: 'date' }
+    ],
+    meals: [
+        { key: 'name', label: 'Meal', type: 'text' },
+        { key: 'calories', label: 'Calories', type: 'number' },
+        { key: 'protein', label: 'Protein (g)', type: 'number' },
+        { key: 'carbs', label: 'Carbs (g)', type: 'number' },
+        { key: 'fats', label: 'Fat (g)', type: 'number' },
+        { key: 'date', label: 'Date', type: 'date' }
+    ]
+};
+
+function esc(value) {
+    return String(value ?? '').replace(/[&<>"']/g, c => (
+        { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+    ));
+}
+
+function isEditing(kind, id) {
+    return editing && editing.kind === kind && editing.id === id;
+}
+
+function editRowHTML(kind, item) {
+    const inputs = FIELDS[kind].map(f => {
+        const extra = f.type === 'number' ? 'min="0" step="any"' : '';
+        return `
+            <label class="edit-field">
+                <span>${f.label}</span>
+                <input name="${f.key}" type="${f.type}" value="${esc(item[f.key])}" ${extra} required />
+            </label>`;
+    }).join('');
+    return `
+        <div class="edit-grid">${inputs}</div>
+        <div class="edit-actions">
+            <button class="btn-cancel" data-action="cancel" data-id="${esc(item.id)}">Cancel</button>
+            <button class="btn-save" data-action="save" data-id="${esc(item.id)}">Save</button>
+        </div>`;
+}
+
+async function saveEdit(kind, id, li) {
+    const updates = {};
+    for (const input of li.querySelectorAll('input[name]')) {
+        if (!input.checkValidity()) { input.reportValidity(); return; }
+        updates[input.name] = input.value;
+    }
+    const res = await fetch(`/api/${kind}/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates)
+    });
+    if (!res.ok) { alert(`Save failed: ${res.status}`); return; }
+    editing = null;
+    refresh();
+}
 //------------------Load Everything------------------
 async function refresh() {
     try {
@@ -18,6 +81,8 @@ async function refresh() {
             fetch('/api/meals').then(res => res.json()),
             fetch('/api/water').then(res => res.json())
         ]);
+        cache = { workouts, meals, water };
+
         renderWorkouts(workouts);
         renderMeals(meals);
         renderWater(water);
@@ -44,8 +109,8 @@ function setCircle(circleId, textId, value, goal) {
 
     circle.style.setProperty('--progress', `${degrees}deg`);
     text.textContent = `${value} / ${goal}`;
-}
 
+}
 //------------------Renderers------------------
 //workout render
 function renderWorkouts(workouts) {
@@ -66,8 +131,16 @@ function renderWorkouts(workouts) {
             <span class="workout-duration">${w.durationMin} min</span>
             <span class="workout-calories">${w.caloriesBurned} cal</span>
             <span class="workout-date">${w.date}</span>
+            <button class="btn-edit" data-action = "edit" data-id = "${esc(w.id)}">Edit</button>
             <button class="delete-workout" data-id="${w.id}">Delete</button>
+
         `;
+        if (isEditing('workouts', w.id)) {
+            li.className = 'editing';
+            li.innerHTML = editRowHTML('workouts', w);
+            workoutList.appendChild(li);
+            return;
+        }
         workoutList.appendChild(li);
     });
     setCircle('workouts-circle', 'workouts-circle-value', todayWorkoutCount, 2);
@@ -104,9 +177,16 @@ function renderMeals(meals) {
             <span class="meal-carbs">${m.carbs} g</span>
             <span class="meal-fats">${m.fats} g</span>
             <span class="meal-date">${m.date}</span>
+            <button class="btn-edit" data-action = "edit" data-id = "${esc(m.id)}">Edit</button>
             <button class="delete-meal" data-id="${m.id}">Delete</button>
         `;
         mealList.appendChild(li);
+        if (isEditing('meals', m.id)) {
+            li.className = 'editing';
+            li.innerHTML = editRowHTML('meals', m);
+            mealList.appendChild(li);
+            return;
+        }
     });
 
     setBar('calories-bar', totalCalories, GOALS.calories);
@@ -264,6 +344,32 @@ mealList?.addEventListener('click', async (e) => {
         refresh();
     }
 });
+//------------------Edit / Save / Cancel Buttons------------------
+function rerender() {
+    renderWorkouts(cache.workouts);
+    renderMeals(cache.meals);
+}
+
+function wireEdit(listEl, kind) {
+    listEl?.addEventListener('click', async (e) => {
+        const btn = e.target.closest('button[data-action]');
+        if (!btn) return;
+        const id = btn.dataset.id;
+
+        if (btn.dataset.action === 'edit') {
+            editing = { kind, id };
+            rerender();
+        } else if (btn.dataset.action === 'cancel') {
+            editing = null;
+            rerender();
+        } else if (btn.dataset.action === 'save') {
+            await saveEdit(kind, id, btn.closest('li'));
+        }
+    });
+}
+
+wireEdit(workoutList, 'workouts');
+wireEdit(mealList, 'meals');
 
 //------------------Initial Load------------------
 refresh();

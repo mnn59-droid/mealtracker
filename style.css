@@ -142,6 +142,7 @@ body {
 
 .welcome-content h1 {
   font-size: 2.4rem;
+  font-weight: 800;
   margin-bottom: 0.75rem;
   letter-spacing: -1px;
 }

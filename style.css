@@ -167,7 +167,7 @@ body {
   padding: 0.8rem 1.2rem;
   border-radius: var(--radius-input);
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   transition:
     transform 0.2s ease,
     opacity 0.2s ease;

@@ -1121,3 +1121,10 @@ body {
     margin: 60px auto;
 }
 
+/* Fix dashboard layout on smaller screens */
+@media (max-width: 1024px) {
+    .wireframe-three-column {
+        grid-template-columns: 1fr;
+    }
+}
+

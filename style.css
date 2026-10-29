@@ -451,7 +451,6 @@ input[type="date"]::-webkit-calendar-picker-indicator{
   opacity: 1;
 }
 
-}
 .btn {
   border: none;
   border-radius: var(--radius-input);
